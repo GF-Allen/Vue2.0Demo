@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>其他指令</title>
+    <title>Vue.set全局操作</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
@@ -20,16 +20,33 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
+    <h1>Vue.set全局操作</h1>
+    <p>由于Javascript的限制，Vue不能自动检测以下变动的数组。</p>
+
+    <p>*当你利用索引直接设置一个项时，vue不会为我们自动更新。</p>
+
+    <p>当你修改数组的长度时，vue不会为我们自动更新。</p>
+    <hr>
     <div id="app">
-        <p>v-pre指令是跳过编译，直接输出{{message}}</p>
-        <p v-pre>{{message}}</p>
+        <p>{{count}}</p>
+        <ul>
+            <li v-for='item in arr'>{{item}}</li>
+        </ul>
     </div>
+    <button onclick="add()">add</button>
     <script>
+        var datas = {
+            count:0,
+            arr:['aaa','bbb','ccc']
+        }
+        function add(){
+            // app.count++;
+            // app.arr[1]='dd';//注释上一行，该行设置无效的，因为上一行改变了虚拟DOM
+            Vue.set(app.arr,1,'dd')
+        }
         var app = new Vue({
             el:'#app',
-            data:{
-                message:'111'
-            }
+            data:datas,
         })
     </script>
 </body>

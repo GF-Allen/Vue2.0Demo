@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-directive自定义指令</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <h1>v-directive自定义指令</h1>
+    <span>v-changecolor不能有大写字母</span>
+    <div id="app">
+        <div v-changecolor="color">{{count}}</div>
+        <div v-changecolor1="color">{{count}}</div>
+        <button @click="add">add</button>
+    </div>
+    <div>
+        <button onclick="unbind()">解绑</button>
+    </div>
+    <script>
+
+        function unbind(){
+            app.$destroy();
+        }
+
+        Vue.directive('changecolor',function(el,binding,vnode){
+            console.log(el)
+            console.log(binding)//数据对象
+            console.log(vnode)//Vue编译生成的虚拟节点
+            el.style='color:'+binding.value;
+        })
+        //生命周期写法
+        Vue.directive('changecolor1',{
+            bind:function(){//开始绑定
+                console.log('bind')        
+            },
+            inserted:function(){//被绑定元素插入父节点时
+                console.log("inserted")
+            },
+            update:function(){//被绑定元素所在模板更新时，无论绑定值是否变化
+                console.log("update")
+            },
+            componentUpdated(){//被绑定元素所在模板完成一次更新周期时
+                console.log("componentUpdated")
+            },
+            unbind:function(){//解除绑定
+                console.log("unbind")
+            }
+        })
+        var app = new Vue({
+            el:'#app',
+            data:{
+                count:0,
+                color:'red'
+            },
+            methods:{
+                add:function(){
+                    this.count++
+                }
+            } 
+        })
+    </script>
+</body>
+
+</html>
