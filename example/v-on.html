@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HelloWorld</title>
+    <title>v-on</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
@@ -19,18 +19,29 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <div id="app">
-        {{message}}
-    </div>
+        <h1>v-on 事件绑定</h1>
 
+        <div id="app">
+            {{count}}
+            <button @click="add">加1</button>
+            <button v-on:click="jian">减1</button>
+        </div>
     <script>
         var app = new Vue({
-            el: '#app',
-            data: {
-                message: 'helloworld'
+            el:'#app',
+            data:{
+                count:0
+            },
+            methods:{
+                add:function(){
+                    this.count++
+                }
             }
         })
 
+        function jian(){
+            app.count--
+        }
     </script>
 </body>
 

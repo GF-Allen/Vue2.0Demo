@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-for</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h3>v-for</h3>
+
+    <div id="app">
+        <div>
+            <ul>
+                <li v-for="item in sortItems">{{item}}</li>
+            </ul>
+        </div>
+        <div>
+            <h4>数字排序</h4>
+            <ul>
+                <li v-for="item2 in sortNumbers">{{item2}}</li>
+            </ul>
+        </div>
+        <div>
+            <h4>对象排序</h4>
+            <ul>
+                <li v-for="(student,i) in sortStudents">{{i}}: {{student.name}} - {{student.age}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items: [12, 52, 43, 44, 55, 23, 10, 9],
+                items2: [12, 52, 43, 44, 55, 23, 10, 9],
+                students: [{ name: "小胡", age: "24" }, { name: "小米", age: "22" }, { name: "大佬", age: "33" }]
+            },
+            computed: {//计算属性
+                sortItems: function () {
+                    return this.items.sort() // 10 12 23 43 44 52 55 9
+                },
+                sortNumbers: function () {
+                    return this.items2.sort(sortNumber)
+                },
+                sortStudents: function () {
+                    return sortSeudent(this.students, 'age')
+                }
+            }
+        })
+
+        function sortNumber(a, b) {
+            return a - b;
+        }
+
+        //对象排序
+        function sortSeudent(array, key) {
+            return array.sort(function (a, b) {
+                var x = a[key];
+                var y = b[key];
+                return x > y;
+            })
+        }
+
+    </script>
+</body>
+
+</html>

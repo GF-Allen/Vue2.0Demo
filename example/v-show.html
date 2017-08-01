@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HelloWorld</title>
+    <title>v-show</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
@@ -19,17 +19,25 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <h3>v-show</h3>
+    <span>v-show 控制的是display属性,v-if是控制DOM是否加载</span>
     <div id="app">
-        {{message}}
+        <div v-show='isLogin'><span>登录成功!</span></div>
+        <button v-show="isNotLogin" onclick="login()">登录</button>
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'helloworld'
+                isLogin: false,
+                isNotLogin: true
             }
         })
+        function login() {
+            app.isLogin = true;
+            app.isNotLogin = false;
+        }
 
     </script>
 </body>

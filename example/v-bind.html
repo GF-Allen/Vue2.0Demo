@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-bind 绑定标签属性</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+    <style>
+        .classA {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .classB {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+        }
+
+        .classC {
+            border: 1px solid red;
+        }
+    </style>
+
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <h1>v-bind 绑定标签属性</h1>
+        <hr>
+        <div id="app">
+            <img v-bind:src="imgSrc" />
+            <p>
+                缩写：
+                <img :src="imgSrc" />
+            </p>
+            <hr>
+            <p>1.绑定css样式</p>
+            <div :class="className"></div>
+            <p>2.绑定classA并进行判断，在isOK为true时显示样式，在isOk为false时不显示样式。</p>
+            <button @click="isAm()">isA</button>
+            <div :class="{classA:isA}"></div>
+            <p>3.绑定数组</p>
+            <div :class="[classB,classC]"></div>
+            <p>4.三元表达式</p>
+            <div :class="isA?classA:classB"></div>
+            <p>5.绑定style</p>
+            <div :style="{color:red,fontSize:font}">绑定style</div>
+            <p>6.绑定style对象</p>
+            <div :style="styleObj">绑定style对象</div>
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    isA: true,
+                    imgSrc: 'https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/img/logo_top_ca79a146.png',
+                    className: 'classA',
+                    //需要声明
+                    classA: 'classA',
+                    classB: 'classB',
+                    classC: 'classC',
+                    red: 'red',
+                    font: '16px',
+                    styleObj: {
+                        fontSize: '24px',
+                        color: 'green'
+                    }
+
+                },
+                methods: {
+                    isAm: function () {
+                        this.isA = !this.isA;
+                    }
+                }
+            })
+        </script>
+    </body>
+
+</html>

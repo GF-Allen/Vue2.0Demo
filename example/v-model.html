@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>v-model 绑定数据源</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>v-model 绑定数据源 双向绑定</h1>
+    <div id="app">
+        <p>原始数据:{{message}}空格</p>
+        <p>文本框</p>
+        <p>v-model<input type="text" v-model='message'></p>
+        <p>v-model.lazy 焦点离开时)<input type="text" v-model.lazy='message'></p>
+        <p>v-model.number 数字开头的时候只输出数字<input type="text" v-model.number='message'></p>
+        <p>v-model.trim 去开头和结尾的空格<input type="text" v-model.trim='message'></p>
+        <hr>
+        <p>文本域</p>
+        <textarea cols="30" rows="10" v-model='message'></textarea>
+        <hr>
+        <p>多选框绑定一个值</p>
+        <input type="checkbox" id="isTrue" v-model="isTrue" />{{isTrue}}
+        <hr>
+        <p>多选框绑定数组</p>
+        <input type="checkbox" id="xiaohong" value="xiaohong" v-model="web_names" />小红
+        <input type="checkbox" id="xiaohuo" value="xiaohuo" v-model="web_names" />小火
+        <input type="checkbox" id="xiaoai" value="xiaoai" v-model="web_names" />小爱
+        <p>选中的人:{{web_names}}</p>
+        <hr>
+        <p>单选框绑定</p>
+        <input type="radio" id="man" value="男" v-model="sex" />男
+        <input type="radio" id="weman" value="女" v-model="sex" />女
+        <p>选择的性别:{{sex}}</p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: '',
+                isTrue: true,
+                web_names: [],
+                sex: "男"
+            }
+        })
+    </script>
+</body>
+
+</html>

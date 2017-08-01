@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HelloWorld</title>
+    <title>v-text v-html</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
@@ -19,19 +19,25 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <h3>v-text v-html</h3>
+    <p>用的是{{xxx}},这种情况是有弊端的，就是当我们网速很慢或者javascript出错时，会暴露我们的{{xxx}}。Vue给我们提供的v-text,就是解决这个问题的。</p>
+    <p>如果在javascript中写有html标签，用v-text是输出不出来的，这时候我们就需要用v-html标签了</p>
     <div id="app">
-        {{message}}
+        <p>{{message}}</p>
+        <p v-text="message"></p>
+        <div v-html="msghtml"></div>
     </div>
+    <p>在生产环境中动态渲染HTML是非常危险的，因为容易导致XSS攻击。所以只能在可信的内容上使用v-html，永远不要在用户提交和可操作的网页上使用。</p>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'helloworld'
+                message: 'HelloWorld',
+                msghtml: '<h4>Hello Vue</h4>'
             }
         })
 
     </script>
 </body>
-
 </html>

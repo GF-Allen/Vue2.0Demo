@@ -9,27 +9,38 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>HelloWorld</title>
+    <title>v-if</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
+    <style>
+        #app {
+            margin: 10px;
+        }
+    </style>
 </head>
 
 <body>
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
+    <h3>v-if</h3>
+    <span>v-if控制是否加载DOM结构</span>
     <div id="app">
-        {{message}}
+        <div v-if='isLogin'><span>登录成功!</span></div>
+        <div v-else><button onclick="login()">登录</button></div>
     </div>
 
     <script>
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'helloworld'
+                isLogin: false
             }
         })
+        function login() {
+            app.isLogin = true;
+        }
 
     </script>
 </body>
