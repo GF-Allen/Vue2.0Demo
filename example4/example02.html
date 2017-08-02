@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>实例方法</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>实例方法</h1>
+    <hr>
+    <div id="app"></div>
+    <p><button onclick="destroy()">销毁</button></p>
+    <p><button onclick="update()">更新</button></p>
+    <p><button onclick="changeData()">更新</button></p>
+    <script>
+        var liu = Vue.extend({
+            template: `<p>{{msg}}</p>`,
+            data: function () {
+                return {
+                    msg: 'I am liu'
+                }
+            },
+            mounted: function () {
+                console.log('被挂载')
+            },
+            destroyed: function () {
+                console.log('销毁')
+            },
+            updated:function(){
+                console.log('更新')
+            }
+        })
+
+        var vm = new liu().$mount('#app')
+        function destroy() {
+            vm.$destroy()//销毁
+        }
+        function update(){
+            vm.$forceUpdate()//更新
+        }
+        function changeData(){
+            vm.msg = '数据被修改'
+            vm.$nextTick(function(){
+                console.log("数据修改")
+            });
+        }
+    </script>
+</body>
+
+</html>

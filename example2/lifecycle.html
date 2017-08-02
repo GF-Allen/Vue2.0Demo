@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vue的生命周期</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+    <style>
+        .left {
+            float: left;
+            margin: 20px
+        }
+
+        #app {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>Vue的生命周期</h1>
+    <hr>
+    <div class="left">
+        <img src="http://7xjyw1.com1.z0.glb.clouddn.com/vue-lifecycle.png" width="500px" height="auto" />
+    </div>
+    <div id="app">
+        {{count}}
+        <p><button @click="add">add</button></p>
+    </div>
+    <div class="left">
+        <button onclick="app.$destroy()">销毁</button>
+    </div>
+    <script>
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                add: function () {
+                    this.count++
+                }
+            },
+            beforeCreate: function () {
+                console.log('1-beforeCreate 初始化之前');//开始加载动画
+            },
+            created: function () {
+                console.log('2-created 创建完成');
+            },
+            beforeMount: function () {
+                console.log('3-beforeMount 挂载之前');
+            },
+            mounted: function () {
+                console.log('4-mounted 被挂在之后');//常用就是停止加载动画
+            },
+            beforeUpdate: function () {
+                console.log('5-beforeUpdate 数据更新前');
+            },
+            updated: function () {
+                console.log('6-updated 被更新后');
+            },
+            activated: function () {
+                console.log('7-activated');
+            },
+            deactivated: function () {
+                console.log('8-deactivated');
+            },
+            beforeDestroy: function () {
+                console.log('9-beforeDestroy 销毁之前');
+            },
+            destroyed: function () {
+                console.log('10-destroyed 销毁之后')
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mixins 混入选项</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>Mixins 混入选项</h1>
+    <p>Mixins一般有两种用途：</p>
+    <p>1、在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染。</p>
+    <p>2、很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用。</p>
+    <p>执行顺序</p>
+    <p>1. 混入的先执行，原生的后执行</p>
+    <p>1. 全局的混入先执行</p>
+    <hr>
+
+    <div id="app">
+        {{count}}
+        <p><button @click='add'>+1</button></p>
+    </div>
+
+    <script>
+        Vue.mixin({
+            updated: function () {
+                console.log("全局的混入")
+            }
+        })
+
+        var addControl = {
+            updated: function () {//Vue的生命周期方法
+                console.log('数据发生变化：' + this.count)
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                add: function () {
+                    this.count++
+                }
+            },
+            updated: function () {
+                console.log('原生的update')
+            },
+            mixins: [addControl]//数组
+        })
+    </script>
+</body>
+
+</html>

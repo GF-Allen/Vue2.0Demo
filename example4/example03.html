@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>实例事件</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>实例事件</h1>
+    <hr>
+    <div id="app">
+        {{count}}
+        <p><button @click="add()">+1</button></p>
+    </div>
+    <p><button onclick="reduce()">-1</button></p>
+    <p><button onclick="reduceOnce()">-1次</button></p>
+    <p><button onclick="off()">关闭-1事件</button></p>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                count:0
+            },
+            methods:{
+                add:function(){
+                    this.count++
+                }
+            }
+        })
+
+        app.$on('reduce',function(){
+            this.count--
+        })
+
+        app.$once('reduceOnce',function(){
+            this.count--;
+        })
+
+        function reduce(){
+            app.$emit('reduce')//发射事件
+        }
+
+        function reduceOnce(){
+            app.$emit('reduceOnce')
+        }
+
+        function off(){
+            app.$off('reduce')
+        }
+    </script>
+</body>
+
+</html>

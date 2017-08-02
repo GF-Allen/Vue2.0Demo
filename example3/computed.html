@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>computed Option 计算选项</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+    <style>
+        div{
+            margin: 10px
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>computed Option 计算选项</h1>
+    <span>computed 的作用主要是对原数据进行改造输出。改造输出：包括格式的编辑，大小写转换，顺序重排，添加符号等等</span>
+
+    <div id="app">
+        {{newPrice}}
+
+        <ul>
+            <li v-for="item in reverseList">{{item.date}}: {{item.title}}</li>
+        </ul>
+    </div>
+    <script>
+
+        var newLists = [
+            {title:"Android O官方版本即将到来, 先来看看DP4开发者预览版",date:'2017/8/1'},
+            {title:"223 个常用的自定义view和第三方类库",date:'2017/8/2'},
+            {title:"FB Instant Games平台利好，看资深开发者分享独特见解",date:'2017/8/3'},
+            {title:"一个项目从开发到完成需要多久,来看正确的做法",date:'2017/8/4'},
+        ]
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                price: 1000,
+                newLists:newLists,
+            },
+            computed: {
+                newPrice: function () {
+                    return '￥' + this.price + '元';
+                },
+                //反转数组
+                reverseList:function(){
+                    return this.newLists.reverse();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

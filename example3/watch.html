@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Watch Option 数据监控</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>Watch Option 数据监控</h1>
+    <hr>
+    <div id="app">
+        <p>今日温度:{{wendu}}</p>
+        <p>穿衣建议:{{chuanyi}}</p>
+        <button @click='heat'>升温</button>
+        <button @click='cool'>降温</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                wendu: -14,
+                chuanyi: '棉袄'
+            },
+            methods: {
+                heat: function () {
+                    this.wendu = this.wendu + 5
+                },
+                cool: function () {
+                    this.wendu = this.wendu - 5
+                }
+            },
+
+            // 构造器内部
+            // watch:{
+            //     //监控的值
+            //     wendu:function(newValue,oldValue){
+            //         if(newValue>=26){
+            //             this.chuanyi = '短袖'
+            //         }else if(newValue>0&&newValue<26){
+            //             this.chuanyi = '夹克'
+            //         }else{
+            //             this.chuanyi = '棉袄'
+            //         }
+            //     }
+            // }
+        })
+
+        //实例属性的写法
+        app.$watch('wendu', function (newValue, oldValue) {
+            if (newValue >= 26) {
+                this.chuanyi = '短袖'
+            } else if (newValue > 0 && newValue < 26) {
+                this.chuanyi = '夹克'
+            } else {
+                this.chuanyi = '棉袄'
+            }
+        })
+    </script>
+</body>
+
+</html>

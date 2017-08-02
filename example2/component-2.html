@@ -9,7 +9,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vue.expend构造器的延伸</title>
+    <title>Component props属性设置</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
@@ -19,22 +19,27 @@
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <h1>Vue.expend构造器的延伸</h1>
+    <h1>Component props属性设置</h1>
     <hr>
-    <author></author>
-    <div id="author"></div>
+    <div id="app">
+        <p>属性中带‘-’定义props时用小驼峰原则</p>
+        <jscom1 :js-count='count'></jscom1>
+    </div>
+
     <script>
-        var authorURL = Vue.extend({
-            template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",//属性需要绑定
-            data:function(){////扩展的data必须这么写
-                return{ 
-                    authorName:'作者',
-                    authorUrl:'http://www.joystack.xin'
+        //需要在Vue的作用域里面
+        var app = new Vue({
+            el:'#app',
+            data:{
+                count : 0,
+            },
+            components:{
+                "jscom1":{
+                    template:`<p style="color:green">局部定义组件  {{jsCount}}</p>`,
+                    props:['jsCount']
                 }
             }
         })
-        new authorURL().$mount("author")//将扩展绑定到author标签上，一般扩展是在组件中使用
-        new authorURL().$mount("#author")
     </script>
 </body>
 

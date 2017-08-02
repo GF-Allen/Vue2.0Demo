@@ -9,32 +9,39 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Vue.expend构造器的延伸</title>
+    <title>实例方法</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="../assets/js/vue.min.js"></script>
+    <script src="../assets/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <h1>Vue.expend构造器的延伸</h1>
+    <h1>实例方法</h1>
     <hr>
-    <author></author>
-    <div id="author"></div>
+    <div id="app"> 
+        {{message}}
+    </div>
     <script>
-        var authorURL = Vue.extend({
-            template:"<p><a :href='authorUrl'>{{authorName}}</a></p>",//属性需要绑定
-            data:function(){////扩展的data必须这么写
-                return{ 
-                    authorName:'作者',
-                    authorUrl:'http://www.joystack.xin'
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message:'HelloWorld'
+            },
+            mounted:function(){//挂载完成之后使用JQuery
+                $('#app').html('我是JQuery')
+            },
+            methods:{
+                add:function(){
+                    console.log('调用了构造器内部的Add方法')
                 }
             }
         })
-        new authorURL().$mount("author")//将扩展绑定到author标签上，一般扩展是在组件中使用
-        new authorURL().$mount("#author")
+        console.log(app)
+        app.add();
     </script>
 </body>
 

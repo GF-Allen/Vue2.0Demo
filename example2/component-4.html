@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Component 标签</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>Component 标签</h1>
+    <hr>
+    <div id="app">
+        <!--绑定具体的组件  -->
+        <component v-bind:is='who'></component>
+        <button @click="change">切换</button>
+    </div>
+
+    <script>
+        var componentA = {
+            template: `<p style='color:red'>is componentA</p>`
+        }
+
+        var componentB = {
+            template: `<p style='color:green'>is componentB</p>`
+        }
+
+        var componentC = {
+            template: `<p style='color:black'>is componentC</p>`
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                who: 'componentA'
+            },
+            components: {
+                "componentA": componentA,
+                "componentB": componentB,
+                "componentC": componentC,
+            },
+            methods: {
+                'change': function () {
+                    if (this.who == 'componentA') {
+                        this.who = 'componentB'
+                    } else if (this.who == 'componentB') {
+                        this.who = 'componentC'
+                    } else {
+                        this.who = 'componentA'
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

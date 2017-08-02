@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Extends Option扩展选项</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../assets/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <h1>Extends Option扩展选项</h1>
+    <p>1.扩展的生命周期先执行</p>
+    <p>2.扩展的方法如果和methods定义的方法名一样，扩展的不执行</p>
+    <hr>
+    <div id="app">
+        ${count}
+        <p><button @click='add'>+1</button></p>
+    </div>
+
+    <script>
+
+        var extendObj = {
+            updated:function(){
+                console.log('扩展的updated方法')
+            },
+            add:function(){
+                console.log('扩展的add方法')
+                this.count++
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 0
+            },
+            methods: {
+                add: function () {
+                    console.log('原生的add方法')
+                    this.count++
+                }
+            },
+            updated:function(){
+                console.log('原生的update方法')
+            },
+            extends:extendObj,//对象
+            delimiters:['${','}']//修改差值形式
+        })
+    </script>
+</body>
+
+</html>
